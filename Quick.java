@@ -44,6 +44,12 @@ public class Quick {
     }
     return pvind;
   }
+  public static int quickselect(int[] dat, int k) {
+
+  }
+  public static void quicksort(int[] dat) {
+
+  }
   public static void main(String[] fsdf) {
     int[] da = {8,4,6,5,2,7,3};
     Quick.partition(da, 2, 6);
