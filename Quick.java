@@ -45,7 +45,8 @@ public class Quick {
     return pvind;
   }
   public static int quickselect(int[] dat, int k) {
-    return 1;
+    quicksort(dat);
+    return dat[k - 1];
   }
   public static void quicksort(int[] dat) {
     qsoh(dat, 0, dat.length - 1);
@@ -81,7 +82,7 @@ public class Quick {
 	}
   public static void main(String[] fsdf) {
     int[] da = {8,4,6,5,2,7,3,10,1,0,-1,9,12,11,-2,5};
-    Quick.quicksort(da);
+    System.out.println(Quick.quickselect(da,3));
     for(int q = 0; q < da.length; q++) {
       System.out.print(da[q] + " ");
     }
