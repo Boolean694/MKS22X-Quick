@@ -4,7 +4,7 @@ public class Quick {
     Random random = new Random();
     int pvind = random.nextInt(en - st) + st;
     int pv = dat[pvind];
-    for(int q = 0; q < dat.length; q++) {
+    for(int q = st; q <= en; q++) {
       if(dat[q] >= pv && q < pvind) {
         int tesw = dat[q];
         dat[q] = dat[pvind - 1];
@@ -54,6 +54,7 @@ public class Quick {
   public static void qsoh(int[] dat, int l, int h) {
     if(l >= h) {return;}
     int pv = partition(dat, l, h);
+    System.out.println(l + " " + pv + " " + h);
     qsoh(dat, l, pv - 1);
     qsoh(dat, pv + 1, h);
   }
@@ -81,10 +82,39 @@ public class Quick {
 	    }
 	}
   public static void main(String[] fsdf) {
-    int[] da = {8,4,6,5,2,7,3,10,1,0,-1,9,12,11,-2,5};
-    System.out.println(Quick.quickselect(da,3));
-    for(int q = 0; q < da.length; q++) {
-      System.out.print(da[q] + " ");
+  System.out.println("Size\t\tMax Value\tquick/builtin ratio ");
+  int[]MAX_LIST = {10,500,1000000};
+  for(int MAX : MAX_LIST){
+    for(int size = 5; size < 200001; size*=2){
+      long qtime=0;
+      long btime=0;
+      //average of 5 sorts.
+      for(int trial = 0 ; trial <=5; trial++){
+        int []data1 = new int[size];
+        int []data2 = new int[size];
+        for(int i = 0; i < data1.length; i++){
+          data1[i] = (int)(Math.random()*MAX);
+          data2[i] = data1[i];
+        }
+        long t1,t2;
+        t1 = System.currentTimeMillis();
+        Quick.quicksort(data2);
+        t2 = System.currentTimeMillis();
+        qtime += t2 - t1;
+        t1 = System.currentTimeMillis();
+        Arrays.sort(data1);
+        t2 = System.currentTimeMillis();
+        btime+= t2 - t1;
+        if(!Arrays.equals(data1,data2)){
+          System.out.println("FAIL TO SORT!");
+          System.out.println(Arrays.toString(data1));
+          System.out.println(Arrays.toString(data2));
+          System.exit(0);
+        }
+      }
+      System.out.println(size +"\t\t"+MAX+"\t"+1.0*qtime/btime);
     }
+    System.out.println();
   }
 }
+  }
